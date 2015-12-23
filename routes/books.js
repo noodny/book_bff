@@ -19,7 +19,7 @@ var router = express.Router();
 var ESI = require('nodesi');
 
 function getBooksServiceUrl(isbn) {
-    return 'https://bnoeyoapfk.localtunnel.me/book?isbn=' + isbn;
+    return 'https://book-catalog-proxy.herokuapp.com/book?isbn=' + isbn;
 }
 
 /* GET users listing. */
