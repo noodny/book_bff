@@ -6,5 +6,18 @@
 
 {{/content}}
 <esi:include src="https://kwasniew.github.io/footer.html"/>
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+$('a[role="lazyload"]').each(function(index, el){
+var $el = $(el),
+    href = $el.attr('href');
+
+    if(href) {
+        $.get(href).done(function(data){
+            $el.replaceWith(data);
+        });
+    }
+});
+</script>
 </body>
 </html>
