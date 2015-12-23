@@ -26,6 +26,8 @@ function getBooksServiceUrl(isbn) {
 router.get('/:isbn', function(req, res, next) {
     var isbn = req.params.isbn;
 
+    var requestId = req.headers['x-request-id'] || null;
+
     request(getBooksServiceUrl(isbn))
         .then(function(response) {
             try {
@@ -42,7 +44,7 @@ router.get('/:isbn', function(req, res, next) {
                 };
 
                 return new Promise(function(resolve, reject) {
-                    req.app.render('book', {book: book, partials: {layout: 'layout'}}, function(err, html) {
+                    req.app.render('book', {book: book, partials: {layout: 'layout'}, requestId: requestId}, function(err, html) {
                         if(err) {
                             return reject(err);
                         }

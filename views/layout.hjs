@@ -8,12 +8,22 @@
 <esi:include src="https://kwasniew.github.io/footer.html"/>
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
+var requestId = '{{ requestId }}';
 $('a[role="lazyload"]').each(function(index, el){
 var $el = $(el),
     href = $el.attr('href');
 
+    var headers = {};
+
+    if(requestId && requestId.length) {
+        headers['X-Request-ID'] = requestId;
+    }
+
     if(href) {
-        $.get(href).done(function(data){
+        $.ajax({
+            url: href,
+            headers: headers
+        }).done(function(data){
             $el.replaceWith(data);
         });
     }
